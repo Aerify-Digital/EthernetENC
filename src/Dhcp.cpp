@@ -214,7 +214,7 @@ void DhcpClass::send_DHCP_MESSAGE(uint8_t messageType, uint16_t secondsElapsed)
         macLenth = 7; // dash + last 3 bytes of mac address
         buffer[17] = hnLength + macLenth; // length of hostname
         uint hnid = 18 + hnLength;
-        printByte((char*)&(buffer[hnid + 0]), '-');
+        strcpy((char*)&(buffer[hnid + 0]), "-");
         printByte((char*)&(buffer[hnid + 1]), _dhcpMacAddr[3]);
         printByte((char*)&(buffer[hnid + 3]), _dhcpMacAddr[4]);
         printByte((char*)&(buffer[hnid + 5]), _dhcpMacAddr[5]);
