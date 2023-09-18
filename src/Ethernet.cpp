@@ -64,6 +64,13 @@ UIPEthernetClass::begin(const uint8_t* mac, unsigned long timeout, unsigned long
   // Initialise the basic info
   init(mac);
 
+  // Setup the hostname for the device
+  if (_hostname) {
+    _dhcp->setHostname(_hostname);
+  } else {
+    _dhcp->setHostname(HOST_NAME);
+  }
+
   // Now try to get our config info from a DHCP server
   int ret = _dhcp->beginWithDHCP((uint8_t*)mac, timeout, responseTimeout);
   if(ret == 1)
@@ -494,6 +501,12 @@ uip_udpchksum(void)
   return sum;
 }
 #endif
+
+void UIPEthernetClass::setHostname(const char* hostname)
+{
+  memset(_hostname, 0, 32);
+  memcpy((void*)_hostname, (void*)hostname, strlen(hostname) >= 31 ? 31 : strlen(hostname));
+}
 
 UIPEthernetClass Ethernet;
 

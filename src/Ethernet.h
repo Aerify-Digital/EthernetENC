@@ -98,6 +98,8 @@ public:
   IPAddress gatewayIP();
   IPAddress dnsServerIP();
 
+  void setHostname(const char* hostname);
+
 private:
   static bool initialized;
   static memhandle in_packet;
@@ -107,6 +109,7 @@ private:
   
   static IPAddress _dnsServerAddress;
   static DhcpClass* _dhcp;
+  static char _hostname[32];
 
   static unsigned long periodic_timer;
   static unsigned long arp_timer;
