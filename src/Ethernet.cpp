@@ -36,6 +36,7 @@ memhandle UIPEthernetClass::uip_packet(NOBLOCK);
 uint8_t UIPEthernetClass::uip_hdrlen(0);
 uint8_t UIPEthernetClass::packetstate(0);
 
+char UIPEthernetClass::_hostname[32];
 IPAddress UIPEthernetClass::_dnsServerAddress;
 DhcpClass* UIPEthernetClass::_dhcp(NULL);
 
