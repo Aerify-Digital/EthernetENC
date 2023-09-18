@@ -36,6 +36,7 @@ memhandle UIPEthernetClass::uip_packet(NOBLOCK);
 uint8_t UIPEthernetClass::uip_hdrlen(0);
 uint8_t UIPEthernetClass::packetstate(0);
 
+bool UIPEthernetClass::_hostnameShowMAC = false;
 char UIPEthernetClass::_hostname[32];
 IPAddress UIPEthernetClass::_dnsServerAddress;
 DhcpClass* UIPEthernetClass::_dhcp(NULL);
@@ -66,6 +67,7 @@ UIPEthernetClass::begin(const uint8_t* mac, unsigned long timeout, unsigned long
   init(mac);
 
   // Setup the hostname for the device
+  _dhcp->setHostnameShowMAC(_hostnameShowMAC);
   if (_hostname) {
     _dhcp->setHostname(_hostname);
   } else {
@@ -502,6 +504,11 @@ uip_udpchksum(void)
   return sum;
 }
 #endif
+
+void UIPEthernetClass::setHostnameShowMAC(bool showMAC)
+{
+  _hostnameShowMAC = showMAC;
+}
 
 void UIPEthernetClass::setHostname(const char* hostname)
 {

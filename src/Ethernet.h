@@ -98,7 +98,8 @@ public:
   IPAddress gatewayIP();
   IPAddress dnsServerIP();
 
-  void setHostname(const char* hostname);
+  void setHostnameShowMAC(bool showMAC);
+  void setHostname(const char *hostname);
 
 private:
   static bool initialized;

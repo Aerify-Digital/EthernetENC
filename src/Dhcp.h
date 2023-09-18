@@ -142,6 +142,7 @@ private:
   uint32_t _dhcpTransactionId;
   uint8_t  _dhcpMacAddr[6];
   char*    _dhcpHostName;
+  uint8_t  _dhcpHostNameShowMAC;
 #ifdef __arm__
   uint8_t  _dhcpLocalIp[4] __attribute__((aligned(4)));
   uint8_t  _dhcpSubnetMask[4] __attribute__((aligned(4)));
@@ -174,6 +175,10 @@ private:
   
   uint8_t parseDHCPResponse(unsigned long responseTimeout, uint32_t& transactionId);
 public:
+  DhcpClass() {
+	  _dhcpHostNameShowMAC = 0;
+  };
+
   IPAddress getLocalIp();
   IPAddress getSubnetMask();
   IPAddress getGatewayIp();
@@ -183,10 +188,8 @@ public:
   int beginWithDHCP(uint8_t *, unsigned long timeout = 60000, unsigned long responseTimeout = 4000);
   int checkLease();
 
-  inline void setHostname(char* hostname)
-  {
-    _dhcpHostName = hostname;
-  }
+  inline void setHostname(char* hostname) { _dhcpHostName = hostname; }
+  inline void setHostnameShowMAC(uint8_t showMAC) { _dhcpHostNameShowMAC = showMAC; }
 };
 
 #endif
