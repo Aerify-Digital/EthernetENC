@@ -110,6 +110,7 @@ private:
   
   static IPAddress _dnsServerAddress;
   static DhcpClass* _dhcp;
+  static bool _hostnameShowMAC;
   static char _hostname[32];
 
   static unsigned long periodic_timer;
